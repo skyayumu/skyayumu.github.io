@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="auther" content="Ayumu Matsubayashi">
+    <meta name="keywords" content="html, css, javascript">
+
+    <!-- 読み込むcssの指定、cssファイルのパスは相対パスで記述する -->
+    <!-- <link rel="stylesheet" href="./css/main.css"> -->
+
+    <title>１０週目｜コンピューター・リテラシーⅡ</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1 id="top">コンピュータ・リテラシーⅡ</h1>
+            <nav>
+                <ul>
+                    <li><a href="">ホーム</a></li>
+                    <li><a href="">タグリファレンス</a></li>
+                    <li><a href="">問い合わせ</a></li>
+                </ul>
+            
+            </nav>
+        </header>
+    
+        <main>
+
+            <section>
+                <h2>Javascript(if, for, while)</h2>
+
+                <!-- HTMLからJavascriptの関数を実行する -->
+                <!-- ボタンとoneclick属性を使うのが一番簡単 -->
+                <button type="button" onclick="hello(1)">日本語</button>
+                <button type="button" onclick="hello(2)">英語</button>
+                <button type="button" onclick="hello(3)">中国語</button>
+                <button type="button" onclick="hello(4)">韓国語</button>
+
+                <!-- いろいろな言語のこんにちには -->
+                <p id="hello">あとで使う</p>
+            </section>
+
+        </main>
+
+        <footer>
+            Copyright &copy; Ayumu Matsubayashi
+        </footer>
+    </div>
+
+    <!-- 外部のjavascriptファイルを読み込む場合 -->
+    <script src="./js/main.js"></script>
+
+</body>
+</html>
