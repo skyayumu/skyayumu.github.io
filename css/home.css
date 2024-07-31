@@ -1,0 +1,521 @@
+@charset "utf-8";
+
+/* マウスに足跡をつける */
+.footpoint {
+    position: absolute;
+    width: 25px;
+    /* 画像の幅 */
+    height: 20px;
+    /* 画像の高さ */
+    background-image: url('../media/足跡.png');
+    background-size: cover;
+    pointer-events: none;
+    opacity: 0;
+    transition: transform 0.1s;
+    /* フェードイン・フェードアウトと回転のアニメーション */
+    transform-origin: center bottom;
+    /* 回転の基点を設定 */
+}
+
+/* homeに最初に足跡マークを出す */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.footprints {
+    position: relative;
+}
+
+.footprint {
+    position: absolute;
+    bottom: 0;
+    animation: fadeInOut 3s ease-in-out;
+    width: 20vw;
+    height: 35vw;
+    background: url('../media/足跡.png') no-repeat center center;
+    background-size: contain;
+    transform: rotate(90deg);
+    /* 90度回転 */
+    opacity: 0;
+    /* 初期状態で非表示 */
+    animation: fadeInOut 1s ease-in-out forwards;
+    /* アニメーションを1.5秒に設定 */
+}
+
+/* 各足跡の出現タイミングをずらす */
+.footprint:nth-child(1) {
+    animation-delay: 0s;
+    transform: rotate(90deg), translateY(100px);
+}
+
+.footprint:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.footprint:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.footprint:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+.footprint:nth-child(5) {
+    animation-delay: 2s;
+}
+
+/* homeに最初にYOARIKIを表示する */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#text-container {
+    display: flex;
+    justify-content: center;
+    /* 中央揃え */
+    align-items: center;
+    /* 垂直方向に中央揃え */
+    height: 50vw;
+    /* ビューポートの高さに合わせる */
+    font-size:15vw;
+    /* 文字の大きさを設定 */
+}
+
+.char {
+    opacity: 0;
+    /* 初期状態で非表示 */
+    animation: fadeIn 1s forwards;
+    /* 1秒でフェードイン */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 30px 40px; /* 上下30px、左右40pxの余白を追加 */
+    position: relative; /* メニューを絶対位置で配置するため */
+}
+header a {
+    text-decoration: none;
+}
+.logo {
+    font-size: 2em;
+    color: black;
+}
+.nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.nav li {
+    margin-left: 30px; /* メニュー項目間の余白を追加 */
+    position: relative;
+}
+.nav li::after {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 1px;
+    background-color: lightgray;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.nav li:last-child::after {
+    display: none;
+}
+.nav a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+.nav a:hover {
+    text-decoration: underline;
+}
+/* ドロップダウンメニューを隠すためのスタイル */
+.nav-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    list-style: none; /* リストの丸を削除 */
+    margin: 0;
+    padding: 0;
+    z-index: 1000; /* メニューが他の要素の上に表示されるように */
+    text-align: left;
+    padding-left: 40px; /* 左に余白を追加 */
+}
+.nav-menu li {
+    padding: 20px;
+    border-bottom: 1px solid lightgray; /* メニュー項目間の境界線を追加 */
+}
+.nav-menu li:last-child {
+    border-bottom: 1px solid lightgray; /* 最後のメニュー項目にも境界線を追加 */
+}
+.nav-menu a {
+    color: black;
+    text-decoration: none; /* アンダーバーをなくす */
+    font-size: 1.2em;
+}
+.nav-menu a:hover {
+    text-decoration: underline;
+}
+/* メニューを閉じるための✕ボタン */
+.menu-close {
+    position: absolute;
+    padding-top: 10px;
+    padding-right: 60px;
+    top: 20px;
+    right: 20px;
+    font-size: 2em;
+    cursor: pointer;
+}
+.menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+/* 中央にYOARIKIを表示するスタイル */
+.center-logo {
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 60px; /* 上に余白を追加 */
+    font-size: 2em;
+}
+/* OFFICIAL MENUのスタイル */
+.official-menu {
+    text-align: left;
+    margin-top: 50px; /* 上に余白を追加 */
+    margin-bottom: 10px;
+    font-size: 1.2em; /* フォントサイズを小さく */
+    position: relative;
+}
+.official-menu span {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1.5px solid black;
+    border-radius: 40px; /* 丸で囲む */
+}
+/* ソーシャルメディアリンクのスタイル */
+.social-link {
+    display: flex;
+    align-items: center;
+    margin-left: 30px; /* メニュー項目間の余白を追加 */
+}
+.social-link a {
+    margin-left: 10px; /* ソーシャルアイコン間の余白を追加 */
+}
+.social-link img {
+    width: 25px; /* 画像の幅を40pxに設定 */
+    height: 25px; /* 画像の高さを40pxに設定 */
+}
+.social-links {
+    display: flex;
+    justify-content: left;
+    padding: 20px;
+    border-top: 1px solid lightgray; /* 上に境界線を追加 */
+}
+.social-links a {
+    margin: 0 10px;
+}
+.social-links img {
+    width: 40px; /* 画像の幅を40pxに設定 */
+    height: 40px; /* 画像の高さを40pxに設定 */
+}
+/* レスポンシブデザイン */
+@media (max-width: 1000px) {
+    .nav {
+        display: none; /* 通常のメニューは非表示 */
+    }
+    .nav-menu.active {
+        display: block; /* ドロップダウンメニューがアクティブなときに表示 */
+    }
+    .menu-toggle {
+        display: block; /* ハンバーガーメニューアイコンを表示 */
+    }
+}
+
+footer {
+    background-color: #000; /* 黒い背景 */
+    color: #fff; /* 白い文字 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* 内側の余白を調整 */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box; /* パディングやボーダーを幅に含める */
+    flex-direction: column; /* 縦方向に並べる */
+}
+
+.footer-logo {
+    position: absolute;
+    left: 50%; /* 中央に配置 */
+    top: 50%;
+    transform: translate(-50%, -50%); /* 中央に配置 */
+    font-size: 15vw; /* 背景用に大きく表示 */
+    color: #666; /* より見やすい灰色 */
+    white-space: nowrap; /* 改行しない */
+    z-index: 0; /* 背景として表示 */
+    opacity: 0.2; /* 背景としての薄さを調整 */
+    pointer-events: none; /* 背景としてのクリックを無効にする */
+}
+
+.footer-content {
+    position: relative;
+    z-index: 1; /* 上に表示 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.footer-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-menu li {
+    margin: 10px 0; /* 上下のマージンを調整 */
+}
+
+.footer-menu a {
+    color: #fff; /* 白い文字 */
+    text-decoration: none;
+    font-size: 2em; /* 文字サイズを2emに設定 */
+    line-height: 1.2; /* 行間を調整 */
+}
+
+.footer-menu a:hover {
+    text-decoration: underline;
+}
+
+.footer-menu .contents {
+    font-size: 1em; /* 文字サイズを1emに設定 */
+    color: #fff; /* 白い文字 */
+    margin-bottom: 10px; /* 上下のマージンを調整 */
+}
+
+.footer-copyright {
+    font-size: 1em; /* コンテンツと同じサイズ */
+    color: #fff; /* 白い文字 */
+    margin-top: 20px; /* 上部のマージンを調整 */
+    text-align: center; /* 中央揃え */
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 80px; /* フッターからの距離 */
+    right: 20px; /* 右端からの距離 */
+    width: 50px;
+    height: 50px;
+    background-color: #333; /* ボタンの背景色 */
+    color: #fff; /* ボタンの文字色 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* 丸いボタン */
+    font-size: 1.5em; /* アイコンのサイズ */
+    text-align: center;
+    cursor: pointer;
+    z-index: 10; /* 他の要素より上に表示 */
+    transition: background-color 0.3s;
+}
+
+.scroll-to-top:hover {
+    background-color: #555; /* ホバー時の背景色 */
+}
+
+.scroll-to-top::before {
+    content: '▲'; /* トップに戻るアイコン */
+    font-size: 1.5em;
+}
+
+main {
+    margin: 40px 200px;
+    /* 横のマージンを200pxに設定 */
+    font-family: Arial, sans-serif;
+    display: flex;
+    min-height: 100vh;
+    /* ビューポートの高さに合わせる */
+    text-align: left;
+    /* テキスト左揃え */
+    padding: 0;
+    /* 内側のパディングをリセット */
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    /* 縦に並べる */
+    align-items: flex-start;
+    /* 左揃え */
+    padding-left: 40px;
+    /* 左に40pxのパディングを追加 */
+    gap: 20px;
+    /* 各要素の間にスペースを追加 */
+}
+
+.content h2 {
+    font-size: 3em;
+    /* 文字サイズを調整 */
+    margin: 0;
+    /* 上下のマージンをリセット */
+    font-weight: bold;
+    /* 太字 */
+    color: #333;
+    /* テキストカラー */
+    position: relative;
+    /* 相対位置に設定 */
+    overflow: hidden;
+    /* 子要素がはみ出さないようにする */
+    padding-bottom: 10px;
+    /* 下線とテキストの間にスペースを追加 */
+    display: block;
+    /* ブロック表示にして横幅を広げる */
+    width: 100%;
+    /* 親要素に合わせた幅 */
+}
+
+.content h2::after {
+    content: "";
+    /* 空のコンテンツを挿入 */
+    position: absolute;
+    /* 絶対位置に設定 */
+    bottom: 0;
+    /* テキストの下に配置 */
+    left: 0;
+    /* 左側に配置 */
+    width: 100%;
+    /* 横幅を100%に設定 */
+    height: 2px;
+    /* 下線の高さ */
+    background-color: #333;
+    /* 下線の色 */
+}
+
+.content h2::before {
+    content: attr(data-text);
+    /* コンテンツとして同じテキストを挿入 */
+    position: absolute;
+    /* 絶対位置に設定 */
+    top: 5px;
+    /* 上方向にわずかにずらす */
+    left: 5px;
+    /* 左方向にわずかにずらす */
+    color: rgba(0, 0, 0, 0.2);
+    /* 薄くした同じ文字の色 */
+    z-index: -1;
+    /* 背景に配置するためにZインデックスを設定 */
+    font-size: 1em;
+    /* 元の文字と同じサイズ */
+    font-weight: bold;
+    /* 同じ太字 */
+}
+
+.content p {
+    font-size: 20px;
+}
+
+.content img {
+    display: block;
+    /* 画像をブロック要素として扱い */
+    margin: 0 auto;
+    /* 自動マージンで中央揃え */
+    width: 15vw;
+    height: 15vw;
+}
+
+.content a {
+    display: block;
+    /* リンクをブロック要素として扱い */
+    margin: 5px auto;
+    /* 上下にマージンを追加 */
+    text-align: center;
+    /* テキストを中央揃え */
+    font-size: 1.2em;
+    /* フォントサイズを調整 */
+    text-decoration: none;
+    /* 下線なし */
+    color: black;
+    /* 黒文字 */
+}
+
+.icon-container {
+    display: flex;
+    /* 横並びに配置 */
+    justify-content: center;
+    /* 中央揃え */
+    gap: 20px;
+    /* 各アイコンの間に20pxのスペースを追加 */
+    margin-top: 20px;
+    /* 上にマージンを追加 */
+    width: 100%;
+    /* 親要素の幅に合わせる */
+}
+
+.icon-container img {
+    width: 20vw;
+    height: auto;
+    /* 画像の幅をビューポート幅の20%に設定し、自動的に高さを調整 */
+}
+
+/* メディアクエリで画面幅が1000px以下の場合のスタイル */
+@media (max-width: 1000px) {
+    main {
+        margin: 40px 5px;
+        /* 横のマージンを0に設定 */
+    }
+
+    .content {
+        padding-left: 5px;
+        /* 左のパディングも削除 */
+    }
+
+    .content img {
+        width: 40vw;
+        height: 40vw;
+    }
+
+    .icon-container img {
+        width: 40vw;
+        /* 画面幅が狭くなった場合に画像の幅をビューポート幅の40%に設定 */
+    }
+}
